@@ -12,6 +12,8 @@ export function LoginButton() {
     setIsLogging(true)
 
     await openUrlAsPopup(getAuthPath('authorize'))
+
+    setTimeout(() => setIsLogging(false), 5000)
   }
 
   return (

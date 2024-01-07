@@ -4,12 +4,14 @@ import { redirect, useSearchParams } from 'next/navigation'
 import React from 'react'
 
 export default function AuthPage() {
-  const query = useSearchParams().get('status')
+  const searchParams = useSearchParams()
+  const status = searchParams.get('status')
+  const error = searchParams.get('error')
 
-  const hasAuthenticated = query === 'success'
+  const hasAuthenticated = status === 'success'
 
   React.useEffect(() => {
-    if (!query) return redirect('/')
+    if (!status && error) return redirect('/')
     if (window.opener && hasAuthenticated) {
       window.opener.location.reload()
     }
@@ -17,7 +19,7 @@ export default function AuthPage() {
     window.close()
 
     redirect('/')
-  }, [hasAuthenticated, query])
+  }, [hasAuthenticated, status, error])
 
   return (
     <div className="container relative">
