@@ -1,6 +1,6 @@
 'use client'
 
-import { getProfile } from '@/api/get-profile'
+import { DecodedUser, getProfile } from '@/api/get-profile'
 import { Button } from './ui/button'
 import {
   DropdownMenu,
@@ -9,11 +9,12 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { Skeleton } from './ui/skeleton'
-import { ChevronDown, LayoutDashboard, LogOut, User } from 'lucide-react'
+import { ChevronDown, Cloud, LayoutDashboard, LogOut, User } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -22,6 +23,14 @@ type AccountMenuProps = {
 }
 
 export function AccountMenu({ token }: AccountMenuProps) {
+  const queryClient = useQueryClient()
+
+  const cached = queryClient.getQueryData<DecodedUser>(['me'])
+
+  if (cached) {
+    queryClient.setQueryData<DecodedUser>(['me'], cached)
+  }
+
   const { data: user, isLoading: isLoadingUser } = useQuery({
     queryKey: ['me'],
     queryFn: () => getProfile(token),
@@ -33,10 +42,13 @@ export function AccountMenu({ token }: AccountMenuProps) {
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="group flex items-center gap-2 min-w-[10rem]"
+          className="group focus:bg-zinc-800 hover:bg-zinc-800 data-[state=open]:bg-zinc-800 flex items-center justify-between gap-2 min-w-[10rem] w-full lg:w-fit outline-none ring-0 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none focus-visible:outline-none"
         >
           {isLoadingUser ? (
-            <Skeleton className="h-4 w-40" />
+            <div className="flex items-center justify-center gap-2">
+              <Skeleton className="w-6 h-6 rounded" />
+              <Skeleton className="h-3 w-32" />
+            </div>
           ) : (
             <div className="flex items-center justify-center gap-2">
               <Image
@@ -85,12 +97,19 @@ export function AccountMenu({ token }: AccountMenuProps) {
               <span>Dashboard</span>
             </Link>
           </DropdownMenuItem>
+          <DropdownMenuItem asChild disabled>
+            <Link className="w-full" href="/docs/api">
+              <Cloud className="mr-2 h-4 w-4" />
+              <span>API</span>
+              <DropdownMenuShortcut>Soon</DropdownMenuShortcut>
+            </Link>
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
             asChild
-            className="text-rose-500 dark:text-rose-400"
+            className="text-rose-500 dark:text-rose-400 dark:focus:bg-rose-600/10"
           >
             <Link className="w-full" href="/api/v1/sign-out" prefetch={false}>
               <LogOut className="mr-2 h-4 w-4" />

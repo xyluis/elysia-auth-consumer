@@ -8,6 +8,7 @@ import { Providers } from '@/components/providers'
 import { Toaster } from '@/components/ui/sonner'
 import { SiteHeader } from '@/components/site-header'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
+import { SiteFooter } from '@/components/site-footer'
 
 export const metadata: Metadata = {
   title: 'Discord OAuth2 w/ Elysia',
@@ -26,7 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            'min-h-screen bg-zinc-900 font-sans antialiased',
+            'min-h-screen bg-zinc-900 text-zinc-50 font-sans antialiased',
             fontSans.className,
           )}
         >
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <div className="relative flex min-h-screen flex-col bg-zinc-950">
                 <SiteHeader />
                 <main className="flex-1">{children}</main>
+                <SiteFooter />
               </div>
             </div>
             <TailwindIndicator />
