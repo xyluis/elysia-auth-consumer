@@ -1,7 +1,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { LogOut } from 'lucide-react'
+import { LogOut, User } from 'lucide-react'
 
 import { Skeleton } from './ui/skeleton'
 import { getProfile } from '@/api/get-profile'
@@ -28,15 +28,18 @@ export function UserInfo({ token }: UserInfoProps) {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center gap-4">
-          <h1 className="font-bold text-2xl">
-            Logged as{' '}
-            <span className="text-zinc-500 underline decoration-zinc-500">
-              @{user?.username}
-            </span>
-          </h1>
+          <div className="flex items-center justify-center gap-4">
+            <User className="w-8 h-8" strokeWidth={2.5} />
+            <h1 className="font-bold text-2xl">
+              Logged as{' '}
+              <span className="text-zinc-500 underline underline-offset-4 decoration-zinc-500">
+                @{user?.username}
+              </span>
+            </h1>
+          </div>
 
           <Button asChild variant="destructive" size="sm">
-            <Link href="/api/v1/sign-out">
+            <Link href="/api/v1/sign-out" prefetch={false}>
               <LogOut className="mr-2 h-4 w-4" />
               Logout
             </Link>
