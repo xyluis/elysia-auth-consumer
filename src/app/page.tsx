@@ -12,7 +12,7 @@ export default function HomePage() {
             Read the code below
           </h1>
 
-          <div className="flex flex-col md:flex-row items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-2">
             <Button asChild variant="secondary" size="sm">
               <Link
                 href="https://github.com/xyluis/elysia-auth-consumer"

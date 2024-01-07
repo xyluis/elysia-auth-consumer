@@ -8,7 +8,7 @@ export function SiteHeader() {
   const token = cookies().get('@zorin:auth')?.value
 
   return (
-    <div className="w-full h-16 flex items-center justify-center px-5 xl:px-0 border-b border-zinc-800">
+    <div className="w-full h-16 flex items-center justify-center px-5 xl:px-0">
       <div className="max-w-[1216px] w-full h-full flex items-center justify-between">
         <Link href="/" className="flex items-center justify-center gap-2">
           <LucideLink strokeWidth={3} />
