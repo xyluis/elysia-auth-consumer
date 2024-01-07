@@ -3,7 +3,7 @@
 import { redirect, useSearchParams } from 'next/navigation'
 import React from 'react'
 
-export default function CallbackPage() {
+export default function AuthPage() {
   const query = useSearchParams().get('status')
 
   const hasAuthenticated = query === 'success'

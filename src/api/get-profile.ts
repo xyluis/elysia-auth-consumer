@@ -8,10 +8,12 @@ export type DecodedUser = {
   sub: string
 }
 
-export async function getProfile() {
-  console.log('get profile')
-
-  const response = await authApi.get<{ decoded: DecodedUser }>('check')
+export async function getProfile(token: string) {
+  const response = await authApi.get<{ decoded: DecodedUser }>('check', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
 
   return response.data.decoded
 }
