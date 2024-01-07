@@ -3,6 +3,8 @@ import { authApi } from '@/lib/api'
 export type DecodedUser = {
   id: string
   username: string
+  avatarURL: string
+  displayName?: string
   iat: number
   exp: number
   sub: string
