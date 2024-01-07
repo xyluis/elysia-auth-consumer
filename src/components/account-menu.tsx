@@ -31,7 +31,10 @@ export function AccountMenu({ token }: AccountMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-2">
+        <Button
+          variant="outline"
+          className="group flex items-center gap-2 min-w-[10rem]"
+        >
           {isLoadingUser ? (
             <Skeleton className="h-4 w-40" />
           ) : (
@@ -46,10 +49,13 @@ export function AccountMenu({ token }: AccountMenuProps) {
               {user?.displayName ?? user?.username}
             </div>
           )}
-          <ChevronDown className="h-4 w-4" />
+          <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
+      <DropdownMenuContent
+        align="center"
+        className="min-w-0 w-[var(--radix-popper-anchor-width)]"
+      >
         <DropdownMenuLabel className="flex flex-col">
           {isLoadingUser ? (
             <div className="space-y-1.5">
