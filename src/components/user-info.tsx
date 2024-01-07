@@ -35,8 +35,8 @@ export function UserInfo({ token }: UserInfoProps) {
             </span>
           </h1>
 
-          <Button asChild variant="destructive">
-            <Link href="/api/v1/sign-out" prefetch={false}>
+          <Button asChild variant="destructive" size="sm">
+            <Link href="/api/v1/sign-out">
               <LogOut className="mr-2 h-4 w-4" />
               Logout
             </Link>
