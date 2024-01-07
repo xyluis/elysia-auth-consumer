@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { Home } from 'lucide-react'
 import Link from 'next/link'
 
@@ -16,12 +16,10 @@ export default function NotFound() {
           </p>
         </div>
 
-        <Button asChild>
-          <Link href="/">
-            <Home className="mr-2 w-4 h-4" />
-            Go back to Home
-          </Link>
-        </Button>
+        <Link href="/" className={buttonVariants({})}>
+          <Home className="mr-2 w-4 h-4" />
+          Go back to Home
+        </Link>
       </div>
     </div>
   )
