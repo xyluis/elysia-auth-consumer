@@ -5,7 +5,7 @@ export function GET(request: NextRequest) {
   const token = searchParams.get('token')
   const expiration = searchParams.get('expiration')
 
-  const redirectURL = new URL('/auth', request.url)
+  const redirectURL = new URL('/api/v1/auth', request.url)
 
   if (!token || !expiration) {
     redirectURL.searchParams.append('status', 'fail')

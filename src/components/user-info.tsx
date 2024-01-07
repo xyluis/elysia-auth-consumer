@@ -29,10 +29,13 @@ export function UserInfo({ token }: UserInfoProps) {
       ) : (
         <div className="flex flex-col items-center justify-center gap-4">
           <h1 className="font-bold text-2xl">
-            Logged as <span className="text-violet-500">@{user?.username}</span>
+            Logged as{' '}
+            <span className="text-zinc-500 underline decoration-zinc-500">
+              @{user?.username}
+            </span>
           </h1>
 
-          <Button asChild>
+          <Button asChild variant="destructive">
             <Link href="/api/v1/sign-out" prefetch={false}>
               <LogOut className="mr-2 h-4 w-4" />
               Logout

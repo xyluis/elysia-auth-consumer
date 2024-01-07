@@ -1,9 +1,13 @@
 'use client'
 
-import { openUrlAsPopup } from '@/lib/utils'
-import { Button } from './ui/button'
-import { getAuthPath } from '@/lib/api'
 import React from 'react'
+import { LogIn } from 'lucide-react'
+
+import { openUrlAsPopup } from '@/lib/utils'
+import { getAuthPath } from '@/lib/api'
+
+import { Button } from './ui/button'
+import { Skeleton } from './ui/skeleton'
 
 export function LoginButton() {
   const [isLogging, setIsLogging] = React.useState(false)
@@ -13,12 +17,19 @@ export function LoginButton() {
 
     await openUrlAsPopup(getAuthPath('authorize'))
 
-    setTimeout(() => setIsLogging(false), 5000)
+    setTimeout(() => setIsLogging(false), 10000)
   }
 
   return (
-    <Button onClick={() => openLoginPage()}>
-      {isLogging ? 'Logging...' : 'Login'}
-    </Button>
+    <>
+      {isLogging ? (
+        <Skeleton className="w-48 h-4 rounded" />
+      ) : (
+        <Button onClick={() => openLoginPage()}>
+          <LogIn className="mr-2 h-4 w-4" />
+          Login
+        </Button>
+      )}
+    </>
   )
 }
