@@ -23,7 +23,9 @@ export function SiteHeader() {
 
         <div className="ml-auto flex items-center justify-center space-x-2">
           {token ? <AccountMenu token={token} /> : <LoginButton />}
-          <p className="text-zinc-500 hidden md:flex">{formatDate(new Date().getTime())}</p>
+          <p className="text-zinc-500 hidden md:flex">
+            {formatDate(new Date().getTime())}
+          </p>
         </div>
       </div>
     </div>
