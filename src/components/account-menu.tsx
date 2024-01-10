@@ -50,7 +50,7 @@ export function AccountMenu({ token }: AccountMenuProps) {
               <Skeleton className="h-3 w-32" />
             </div>
           ) : (
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-2 pointer-events-auto">
               <Image
                 src={user?.avatarURL || ''}
                 width={24}
@@ -61,11 +61,12 @@ export function AccountMenu({ token }: AccountMenuProps) {
               {user?.displayName ?? user?.username}
             </div>
           )}
-          <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
+          <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180 pointer-events-auto" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="center"
+        sideOffset={5}
         className="min-w-0 w-[var(--radix-popper-anchor-width)]"
       >
         <DropdownMenuLabel className="flex flex-col">
