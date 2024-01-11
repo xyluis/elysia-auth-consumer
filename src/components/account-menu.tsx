@@ -47,18 +47,24 @@ export function AccountMenu({ token }: AccountMenuProps) {
           {isLoadingUser ? (
             <div className="flex items-center justify-center gap-2">
               <Skeleton className="w-6 h-6 rounded" />
-              <Skeleton className="h-3 w-32" />
+              <Skeleton className="h-3 w-24" />
             </div>
           ) : (
             <div className="flex items-center justify-center gap-2 pointer-events-auto">
-              <Image
-                src={user?.avatarURL || ''}
-                width={24}
-                height={24}
-                alt={`${user?.username}'s avatar`}
-                className="w-6 h-6 rounded object-cover"
-              />
-              {user?.displayName ?? user?.username}
+              {user ? (
+                <>
+                  <Image
+                    src={user.avatarURL}
+                    width={24}
+                    height={24}
+                    alt={`${user.username}'s avatar`}
+                    className="w-6 h-6 rounded object-cover"
+                  />
+                  {user.displayName ?? user.username}
+                </>
+              ) : (
+                'No user data'
+              )}
             </div>
           )}
           <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180 pointer-events-auto" />
@@ -77,10 +83,16 @@ export function AccountMenu({ token }: AccountMenuProps) {
             </div>
           ) : (
             <>
-              {user?.displayName ?? user?.username}
-              <span className="text-xs font-normal text-muted-foreground">
-                @{user?.username}
-              </span>
+              {user ? (
+                <>
+                  {user?.displayName ?? user?.username}
+                  <span className="text-xs font-normal text-muted-foreground">
+                    @{user?.username}
+                  </span>
+                </>
+              ) : (
+                'No user data'
+              )}
             </>
           )}
         </DropdownMenuLabel>
@@ -111,6 +123,7 @@ export function AccountMenu({ token }: AccountMenuProps) {
           <DropdownMenuItem
             asChild
             className="text-rose-500 dark:text-rose-400 dark:focus:bg-rose-600/10"
+            disabled={isLoadingUser || !user}
           >
             <Link className="w-full" href="/api/v1/sign-out" prefetch={false}>
               <LogOut className="mr-2 h-4 w-4" />
