@@ -9,6 +9,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { SiteHeader } from '@/components/site-header'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { SiteFooter } from '@/components/site-footer'
+import { CookieConsent } from '@/components/cookie-consent'
 
 export const metadata: Metadata = {
   title: 'Discord OAuth2 w/ Elysia',
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <SiteFooter />
               </div>
             </div>
+            <CookieConsent />
             <TailwindIndicator />
             <Toaster richColors />
           </Providers>

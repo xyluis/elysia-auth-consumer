@@ -3,10 +3,9 @@ import { AccountMenu } from './account-menu'
 import { LoginButton } from './login-button'
 import { Link as LucideLink } from 'lucide-react'
 import Link from 'next/link'
-import { formatDate } from '@/lib/utils'
 
 export function SiteHeader() {
-  const token = cookies().get('@zorin:auth')?.value
+  const token = cookies().get('auth')?.value
 
   return (
     <div className="w-full border-b">
@@ -23,9 +22,6 @@ export function SiteHeader() {
 
         <div className="ml-auto flex items-center justify-center space-x-2">
           {token ? <AccountMenu token={token} /> : <LoginButton />}
-          <p className="text-zinc-500 hidden md:flex">
-            {formatDate(new Date().getTime())}
-          </p>
         </div>
       </div>
     </div>

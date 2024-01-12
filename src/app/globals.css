@@ -4,7 +4,7 @@
 
 @layer base {
   * {
-    @apply border-zinc-800;
+    @apply border-zinc-800 box-border;
   }
 
   body {
